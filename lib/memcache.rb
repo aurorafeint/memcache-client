@@ -108,14 +108,14 @@ class MemCache
   ##
   # Log debug/info/warn/error to the given Logger, defaults to nil.
 
-  attr_reader :logger
+  attr_accessor :logger
 
   ##
   # Don't send or look for a reply from the memcached server for write operations.
   # Please note this feature only works in memcached 1.2.5 and later.  Earlier
   # versions will reply with "ERROR".
   attr_reader :no_reply
-  
+
   ##
   # Accepts a list of +servers+ and a list of +opts+.  +servers+ may be
   # omitted.  See +servers=+ for acceptable server list arguments.
@@ -176,7 +176,7 @@ class MemCache
     logger.info { "memcache-client #{VERSION} #{Array(servers).inspect}" } if logger
 
     Thread.current[:memcache_client] = self.object_id if !@multithread
-    
+
 
     self.servers = servers
   end
